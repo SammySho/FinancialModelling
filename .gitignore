@@ -45,10 +45,6 @@ env/
 *.mov
 *.avi
 
-# Ignore datasets?
-*.json
-*.csv
-
 # Ignore notebooks
 *.ipynb
 
