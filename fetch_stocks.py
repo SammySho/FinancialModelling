@@ -9,6 +9,10 @@ ticker_symbols = ["AAPL", "TSLA", "SPY"]
 url = os.environ.get("DB_URL")
 key = os.environ.get("DB_KEY")
 
+# Debugging: Print whether variables exist (but NOT their values)
+if not url or not key:
+    raise ValueError("ERROR: DB_URL or DB_KEY is missing. Check GitHub secrets.")
+
 supabase: Client = create_client(url, key)
 
 for ticker_symbol in ticker_symbols:
