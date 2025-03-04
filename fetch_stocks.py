@@ -2,18 +2,12 @@ import yfinance as yf
 import pandas as pd
 import os
 from supabase import create_client, Client
-import json
 
 # Define the stock symbol (e.g., Apple, Tesla, S&P 500 ETF)
 ticker_symbols = ["AAPL", "TSLA", "SPY"]
 
-# Load the json called "supabase_keys.json"
-with open(os.path.join("supabase_keys.json"), "r") as f:
-    supabase_keys = json.load(f)
-
-# Get the url and key from the json
-url = supabase_keys["url"]
-key = supabase_keys["key"]
+url = os.environ.get("DB_URL")
+key = os.environ.get("DB_KEY")
 
 supabase: Client = create_client(url, key)
 
@@ -48,9 +42,3 @@ for ticker_symbol in ticker_symbols:
         )
     except Exception as e:
         print(e)
-        # Log the response to a log file
-        with open("log.txt", "a") as f:
-            f.write(f"Error: {e}\n")
-            f.write(f"Response: {response}\n")
-            f.write(f"Stock Data: {stock_data}\n")
-            f.write(f"Ticker Symbol: {ticker_symbol}\n")
