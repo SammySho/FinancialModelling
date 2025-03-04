@@ -19,14 +19,6 @@ jobs:
 
       - name: Install Dependencies
         run: pip install yfinance pandas supabase
-        
-      - name: Debug Environment Variables
-        run: |
-          echo "DB_URL is set: ${DB_URL:+YES}"  # Check if DB_URL exists
-          echo "DB_KEY is set: ${DB_KEY:+YES}"  # Check if DB_KEY exists
-        env:
-          DB_URL: ${{ secrets.DB_URL }}
-          DB_KEY: ${{ secrets.DB_KEY }}
           
       - name: Run Stock Data Fetching Script
         env:
