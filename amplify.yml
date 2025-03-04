@@ -4,12 +4,13 @@ frontend:
         preBuild:
             commands:
                 - cd frontend
-                - npm install --include=dev
+                - rm -rf node_modules
+                - npm ci --include=dev
         build:
             commands:
                 - npx react-scripts build
     artifacts:
-        baseDirectory: frontend/build  # Change to where React is built
+        baseDirectory: frontend/build 
         files:
             - '**/*'
     cache:
