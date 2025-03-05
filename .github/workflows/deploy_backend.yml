@@ -39,9 +39,6 @@ jobs:
 
           cd "$DEPLOY_DIR"
 
-          echo "Found the following files in the deployment directory:"
-          ls -la
-
           # Ensure the deployment script is executable, then run it.
           echo "Running deployment script..."
           chmod +x backend/scripts/deploy_backend.sh
