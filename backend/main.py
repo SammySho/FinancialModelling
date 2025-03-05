@@ -29,6 +29,7 @@ print("Successfully created Supabase client")
 
 app = FastAPI()
 
+
 @app.get("/test")
 def test():
     return {"message": "Test endpoint is working."}
