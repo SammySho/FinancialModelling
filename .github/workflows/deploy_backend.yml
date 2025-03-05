@@ -37,6 +37,10 @@ jobs:
               git pull origin main
           fi
 
+          # Set environment variables for the backend
+          export SUPABASE_URL="${{ secrets.DB_URL }}"
+          export SUPABASE_KEY="${{ secrets.DB_KEY }}"
+
           cd "$DEPLOY_DIR"
 
           # Ensure the deployment script is executable, then run it.
