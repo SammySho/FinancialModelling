@@ -41,7 +41,7 @@ else
         cd $DEPLOY_DIR
         git clone $REPO_URL backend
     else
-        echo "Backend directory exists. Pulling latest changes..."
+        echo "Backend directory exists. Cleaning and pulling latest changes..."
         clean_and_update_repo "$BACKEND_DIR"
     fi
 fi
