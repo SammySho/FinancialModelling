@@ -76,7 +76,7 @@ jobs:
           # Create systemd service file if it doesn't exist
           if [ ! -f "$SERVICE_FILE" ]; then
               echo "Systemd service file not found. Creating fastapi.service..."
-              sudo tee $SERVICE_FILE > /dev/null <<EOL
+              sudo tee $SERVICE_FILE > /dev/null <<SERVICE_EOF
 [Unit]
 Description=FastAPI Backend Service
 After=network.target
@@ -89,7 +89,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-EOL
+SERVICE_EOF
               sudo systemctl daemon-reload
               sudo systemctl enable fastapi.service
           fi
