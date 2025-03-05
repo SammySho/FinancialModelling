@@ -58,7 +58,3 @@ def get_stock_data(ticker: str):
 
     logger.info(f"Data retrieved: {response.data}")
     return response.data
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
