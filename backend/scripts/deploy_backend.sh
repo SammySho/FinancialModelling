@@ -74,4 +74,13 @@ EOF
     sudo systemctl enable fastapi.service
 fi
 
+# Always restart the service after deployment
+echo "Restarting FastAPI service..."
+sudo systemctl daemon-reload
+sudo systemctl restart fastapi.service
+
+# Wait a moment to check the service status
+sleep 2
+sudo systemctl status fastapi.service
+
 echo "Deployment complete. FastAPI backend is now running and listening on port 8000."
