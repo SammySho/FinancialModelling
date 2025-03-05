@@ -2,56 +2,141 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    font-family: 'Arial', sans-serif;
-  }
+}
   
-  .header {
-    color: #2c3e50;
+.header {
+    color: #1a237e;
+    font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
-  }
+}
   
-  .controlPanel {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
+.controlPanel {
+    background: white;
     border-radius: 8px;
+    padding: 1.5rem;
     margin-bottom: 2rem;
-  }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
   
-  .selectContainer {
+.selectContainer {
     margin-bottom: 1.5rem;
-  }
+}
   
-  .select {
-    padding: 8px 12px;
+.selectContainer label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #424242;
+    font-weight: 500;
+}
+  
+.select {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
-    border: 1px solid #ced4da;
-    margin-left: 10px;
     font-size: 1rem;
-  }
+    background-color: white;
+    cursor: pointer;
+}
   
-  .signalsContainer {
+.select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+  
+.signalsSection h3 {
+    color: #424242;
+    margin-bottom: 1rem;
+}
+  
+.signalsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
-    margin-bottom: 2rem;
-  }
+}
   
-  .checkboxLabel {
+.checkboxLabel {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     cursor: pointer;
-  }
+    user-select: none;
+}
   
-  .checkbox {
+.checkbox {
+    margin-right: 0.5rem;
     width: 18px;
     height: 18px;
-  }
+}
   
-  .chartContainer {
+.chartContainer {
     background: white;
-    padding: 1rem;
     border-radius: 8px;
+    padding: 1.5rem;
+    min-height: 450px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+    position: relative;
+}
+  
+.loadingState {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+  
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 1rem;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2196F3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+  
+.errorState {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #d32f2f;
+}
+  
+.retryButton {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+  
+.retryButton:hover {
+    background-color: #1976D2;
+}
+  
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .header {
+        font-size: 1.5rem;
+    }
+    
+    .chartContainer {
+        padding: 1rem;
+    }
+}
