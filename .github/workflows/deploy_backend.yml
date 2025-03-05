@@ -40,6 +40,7 @@ jobs:
           cd "$DEPLOY_DIR"
 
           # Ensure the deployment script is executable, then run it.
+          echo "Running deployment script..."
           chmod +x scripts/deploy_backend.sh
           ./scripts/deploy_backend.sh
           EOF
