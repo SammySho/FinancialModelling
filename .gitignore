@@ -50,3 +50,6 @@ env/
 
 # Ignore logs?
 *.log
+
+# Ignore keys
+*.pem
