@@ -35,25 +35,30 @@ def test():
 
 @app.get("/stocks/{ticker}")
 def get_stock_data(ticker: str):
-    # Calculate the date one year ago
-    one_year_ago = (datetime.datetime.now() - datetime.timedelta(days=365)).date().isoformat()
+    try:
+        # Calculate the date one year ago
+        one_year_ago = (datetime.datetime.now() - datetime.timedelta(days=365)).date().isoformat()
 
-    logger.info(f"Fetching data for ticker: {ticker} from {one_year_ago}")
+        logger.info(f"Fetching data for ticker: {ticker} from {one_year_ago}")
 
-    print("Calculated one year ago date:", one_year_ago)
+        print("Calculated one year ago date:", one_year_ago)
 
-    # Query the "stocks" table for the given ticker and filter for the last year of data
-    response = (
-        supabase.table("stocks")
-        .select("*")
-        .eq("ticker", ticker)
-        .gte("date", one_year_ago)
-        .execute()
-    )
+        # Query the "stocks" table for the given ticker and filter for the last year of data
+        response = (
+            supabase.table("stocks")
+            .select("*")
+            .eq("ticker", ticker)
+            .gte("date", one_year_ago)
+            .execute()
+        )
 
-    # Check if the query returned data
-    if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail="Error fetching data from Supabase")
+        if not response.data:
+            logger.warning(f"No data found for ticker {ticker}")
+            return []
+        
+        logger.info(f"Data retrieved: {len(response.data)} records")
+        return response.data
 
-    logger.info(f"Data retrieved: {response.data}")
-    return response.data
+    except Exception as e:
+        logger.error(f"Error fetching data: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching data from Supabase: {str(e)}")
