@@ -73,6 +73,6 @@ EOF
 fi
 
 # Restart the service to pick up any new changes
-sudo systemctl restart fastapi.service
+#sudo systemctl restart fastapi.service
 
 echo "Deployment complete. FastAPI backend is now running and listening on port 8000."
