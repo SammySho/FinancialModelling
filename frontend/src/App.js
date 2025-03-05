@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import styles from './App.module.css';
+
 
 const App = () => {
   const [tickers] = useState(["AAPL", "SPY", "TSLA"]);
@@ -14,9 +16,11 @@ const App = () => {
   });
 
   useEffect(() => {
-    axios.get(`https://your-backend.com/stocks/${selectedTicker}`)
-      .then((response) => setStockData(response.data))
-      .catch((error) => console.error(error));
+    // Get the backend URL from the environment variable
+    const backendUrl = process.env.REACT_APP_API_URL;
+    axios.get(`${backendUrl}/stocks/AAPL`)
+      .then(response => setStockData(response.data))
+      .catch(error => console.error(error));
   }, [selectedTicker]);
 
   return (
