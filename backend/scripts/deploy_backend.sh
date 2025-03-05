@@ -69,7 +69,7 @@ Restart=always
 WantedBy=multi-user.target
 EOF
     sudo systemctl daemon-reload
-    sudo systemctl enable fastapi.service=
+    sudo systemctl enable fastapi.service
 fi
 
 echo "Deployment complete. FastAPI backend is now running and listening on port 8000."
