@@ -61,8 +61,8 @@ After=network.target
 
 [Service]
 User=ec2-user
-WorkingDirectory=$BACKEND_DIR
-ExecStart=$BACKEND_DIR/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
+WorkingDirectory=/home/ec2-user/FinancialModelling/backend
+ExecStart=/home/ec2-user/FinancialModelling/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
 
 [Install]
