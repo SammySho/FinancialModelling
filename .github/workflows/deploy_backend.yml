@@ -1,6 +1,7 @@
 name: Deploy FastAPI Backend
 
 on:
+  workflow_dispatch: # Allows manual triggering
   push:
     branches:
       - main
@@ -23,9 +24,15 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           
           # Define variables
-          DEPLOY_DIR="/home/ec2-user/your-backend"
-          REPO_URL="https://github.com/yourusername/your-repo.git"
+          DEPLOY_DIR="/home/ec2-user/FinancialModelling"
+          REPO_URL="https://github.com/SammySho/FinancialModelling.git"
           BACKEND_DIR="$DEPLOY_DIR/backend"
+
+          # Ensure git is installed
+          if ! command -v git >/dev/null 2>&1; then
+              echo "Git not found. Installing git..."
+              sudo yum install -y git
+          fi
           
           # Check if the deployment directory exists
           if [ ! -d "$DEPLOY_DIR" ]; then
