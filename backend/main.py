@@ -41,9 +41,7 @@ def get_stock_data(ticker: str):
 
         logger.info(f"Fetching data for ticker: {ticker} from {one_year_ago}")
 
-        print("Calculated one year ago date:", one_year_ago)
-
-        # Query the "stocks" table for the given ticker and filter for the last year of data
+        # Query the "stocks" table
         response = (
             supabase.table("stocks")
             .select("*")
@@ -52,13 +50,17 @@ def get_stock_data(ticker: str):
             .execute()
         )
 
-        if not response.data:
-            logger.warning(f"No data found for ticker {ticker}")
-            return []
+        # Debug information
+        logger.info(f"Response type: {type(response)}")
+        logger.info(f"Response dir: {dir(response)}")
+        logger.info(f"Response dict: {response.__dict__}")
+
+        # Access data directly without checking
+        result_data = response.data if hasattr(response, 'data') else []
         
-        logger.info(f"Data retrieved: {len(response.data)} records")
-        return response.data
+        logger.info(f"Result data: {result_data}")
+        return result_data
 
     except Exception as e:
-        logger.error(f"Error fetching data: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching data from Supabase: {str(e)}")
+        logger.error(f"Error in get_stock_data: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
