@@ -39,8 +39,8 @@ jobs:
 
           cd "$DEPLOY_DIR"
 
-          echo "SUPABASE_URL=${{ secrets.DB_URL }}" > backend/.env
-          echo "SUPABASE_KEY=${{ secrets.DB_KEY }}" >> backend/.env
+          echo "DB_URL=${{ secrets.DB_URL }}" > backend/.env
+          echo "DB_KEY=${{ secrets.DB_KEY }}" >> backend/.env
 
           # Ensure the deployment script is executable, then run it.
           echo "Running deployment script..."
