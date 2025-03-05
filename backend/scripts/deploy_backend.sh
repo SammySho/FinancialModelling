@@ -55,7 +55,7 @@ if [ ! -d "venv" ]; then
     # First ensure python3-venv is installed
     if ! command -v python3-venv &> /dev/null; then
         echo "Installing python3-venv..."
-        sudo yum install -y python3-venv
+        sudo yum install -y python3-pip python3.11-venv
     fi
     
     # Remove any partial venv if it exists
@@ -72,13 +72,13 @@ if [ ! -f "venv/bin/activate" ]; then
     echo "Virtual environment activation script not found. Recreating venv..."
     rm -rf venv
     python3 -m venv venv
-    
-    echo "Virtual environment created."
 fi
 
 # Activate the virtual environment and install dependencies
+echo "Activating virtual environment..."
 source venv/bin/activate
 if [ -f "requirements.txt" ]; then
+    echo "Installing dependencies..."
     pip install -r requirements.txt
 else
     echo "requirements.txt not found. Exiting."
