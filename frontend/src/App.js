@@ -19,7 +19,7 @@ const App = () => {
     // Get the backend URL from the environment variable
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
     console.log(backendUrl);
-    axios.get(`${backendUrl}/stocks/AAPL`)
+    axios.get(`${backendUrl}:8000/stocks/AAPL`)
       .then(response => setStockData(response.data))
       .catch(error => console.error(error));
   }, [selectedTicker]);
