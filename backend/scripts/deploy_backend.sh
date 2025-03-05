@@ -55,7 +55,7 @@ if [ ! -d "venv" ]; then
     # First ensure python3-venv is installed
     if ! command -v python3-venv &> /dev/null; then
         echo "Installing python3-venv..."
-        sudo yum install -y python3-pip python3.11-venv
+        sudo yum install -y python3 python3-pip
     fi
     
     # Remove any partial venv if it exists
