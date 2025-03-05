@@ -98,4 +98,4 @@ SERVICE_EOF
           echo "Restarting FastAPI service..."
           sudo systemctl restart fastapi.service
           
-          EOF
+EOF
