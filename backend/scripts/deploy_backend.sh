@@ -51,6 +51,8 @@ else
     exit 1
 fi
 
+echo "Virtual environment activated."
+
 # Create systemd service file if it doesn't exist
 if [ ! -f "$SERVICE_FILE" ]; then
     echo "Systemd service file not found. Creating fastapi.service..."

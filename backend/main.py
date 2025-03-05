@@ -29,7 +29,6 @@ print("Successfully created Supabase client")
 
 app = FastAPI()
 
-
 @app.get("/test")
 def test():
     return {"message": "Test endpoint is working."}
@@ -53,9 +52,8 @@ def get_stock_data(ticker: str):
     )
 
     # Check if the query returned data
-    if response.error:
-        logger.error(f"Supabase error: {response.error.message}")
-        raise HTTPException(status_code=400, detail=response.error.message)
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail="Error fetching data from Supabase")
 
     logger.info(f"Data retrieved: {response.data}")
     return response.data
