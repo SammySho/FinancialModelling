@@ -34,3 +34,7 @@ def get_stock_data(ticker: str):
         raise HTTPException(status_code=400, detail=response.error.message)
 
     return response.data
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
