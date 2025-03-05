@@ -70,8 +70,6 @@ User=ec2-user
 WorkingDirectory=$BACKEND_DIR
 ExecStart=$BACKEND_DIR/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
-StandardOutput=append:$BACKEND_DIR/uvicorn.log
-StandardError=append:$BACKEND_DIR/uvicorn.log
 
 [Install]
 WantedBy=multi-user.target
