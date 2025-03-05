@@ -114,7 +114,8 @@ sudo systemctl enable nginx
 # Request SSL certificate if not already present
 if [ ! -f "/etc/letsencrypt/live/backend.sammyshorthouse.com/fullchain.pem" ]; then
     echo "Requesting SSL certificate..."
-    sudo certbot --nginx -d backend.sammyshorthouse.com --non-interactive --agree-tos --preferred-challenges http
+    # Using a temporary email for registration
+    sudo certbot --nginx -d backend.sammyshorthouse.com --non-interactive --agree-tos --email sammy.shorthouse0@gmail.com --preferred-challenges http
 fi
 
 # Always restart the services after deployment
