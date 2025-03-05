@@ -2,13 +2,16 @@ import os
 import datetime
 from fastapi import FastAPI, HTTPException
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Read your Supabase credentials from environment variables
 SUPABASE_URL = os.getenv("DB_URL")
 SUPABASE_KEY = os.getenv("DB_KEY")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
-    raise Exception("Missing Supabase credentials. Set SUPABASE_URL and SUPABASE_KEY environment variables.")
+    raise Exception("Missing Supabase credentials. Set DB_URL and DB_KEY environment variables.")
 
 # Create a Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
