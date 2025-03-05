@@ -18,6 +18,7 @@ const App = () => {
   useEffect(() => {
     // Get the backend URL from the environment variable
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    console.log(backendUrl);
     axios.get(`${backendUrl}/stocks/AAPL`)
       .then(response => setStockData(response.data))
       .catch(error => console.error(error));
