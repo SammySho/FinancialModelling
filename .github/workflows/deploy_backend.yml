@@ -23,6 +23,12 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<-'EOF'
           
+          # Ensure git is installed
+          if ! command -v git &> /dev/null; then
+              echo "Git not found. Installing git..."
+              sudo yum install -y git
+          fi
+
           # Define variables
           DEPLOY_DIR="/home/ec2-user/FinancialModelling"
 
@@ -32,9 +38,12 @@ jobs:
               mkdir -p "$DEPLOY_DIR"
               git clone https://github.com/SammySho/FinancialModelling.git "$DEPLOY_DIR"
           else
-              echo "Deployment directory exists. Pulling latest changes..."
+              echo "Deployment directory exists. Cleaning and pulling latest changes..."
               cd "$DEPLOY_DIR"
-              git pull origin main
+              git reset --hard HEAD
+              git clean -fd
+              git fetch origin
+              git reset --hard origin/main
           fi
 
           cd "$DEPLOY_DIR"
