@@ -52,7 +52,28 @@ cd $BACKEND_DIR
 # Set up virtual environment if not present
 if [ ! -d "venv" ]; then
     echo "Setting up virtual environment..."
+    # First ensure python3-venv is installed
+    if ! command -v python3-venv &> /dev/null; then
+        echo "Installing python3-venv..."
+        sudo yum install -y python3-venv
+    fi
+    
+    # Remove any partial venv if it exists
+    rm -rf venv
+    
+    # Create fresh venv
     python3 -m venv venv
+    
+    echo "Virtual environment created."
+fi
+
+# Ensure venv activation script exists
+if [ ! -f "venv/bin/activate" ]; then
+    echo "Virtual environment activation script not found. Recreating venv..."
+    rm -rf venv
+    python3 -m venv venv
+    
+    echo "Virtual environment created."
 fi
 
 # Activate the virtual environment and install dependencies
