@@ -7,44 +7,44 @@ REPO_URL="https://github.com/SammySho/FinancialModelling.git"
 BACKEND_DIR="$DEPLOY_DIR/backend"
 SERVICE_FILE="/etc/systemd/system/fastapi.service"
 
-# Ensure git is installed
-if ! command -v git >/dev/null 2>&1; then
-    echo "Git not found. Installing git..."
-    sudo yum install -y git
-fi
+# # Ensure git is installed
+# if ! command -v git >/dev/null 2>&1; then
+#     echo "Git not found. Installing git..."
+#     sudo yum install -y git
+# fi
 
-# Function to clean and update repository
-clean_and_update_repo() {
-    local dir=$1
-    echo "Cleaning and updating repository in $dir..."
-    cd "$dir"
-    # Reset any local changes
-    git reset --hard HEAD
-    # Clean untracked files and directories
-    git clean -fd
-    # Pull latest changes
-    git fetch origin
-    git reset --hard origin/main
-}
+# # Function to clean and update repository
+# clean_and_update_repo() {
+#     local dir=$1
+#     echo "Cleaning and updating repository in $dir..."
+#     cd "$dir"
+#     # Reset any local changes
+#     git reset --hard HEAD
+#     # Clean untracked files and directories
+#     git clean -fd
+#     # Pull latest changes
+#     git fetch origin
+#     git reset --hard origin/main
+# }
 
-# Create the deployment directory if it doesn't exist
-if [ ! -d "$DEPLOY_DIR" ]; then
-    echo "Deployment directory not found. Creating and cloning repo..."
-    mkdir -p $DEPLOY_DIR
-    cd $DEPLOY_DIR
-    git clone $REPO_URL backend
-else
-    echo "Deployment directory exists."
-    # If backend directory doesn't exist, clone it; otherwise pull latest changes.
-    if [ ! -d "$BACKEND_DIR" ]; then
-        echo "Backend directory not found. Cloning backend..."
-        cd $DEPLOY_DIR
-        git clone $REPO_URL backend
-    else
-        echo "Backend directory exists. Cleaning and pulling latest changes..."
-        clean_and_update_repo "$BACKEND_DIR"
-    fi
-fi
+# # Create the deployment directory if it doesn't exist
+# if [ ! -d "$DEPLOY_DIR" ]; then
+#     echo "Deployment directory not found. Creating and cloning repo..."
+#     mkdir -p $DEPLOY_DIR
+#     cd $DEPLOY_DIR
+#     git clone $REPO_URL backend
+# else
+#     echo "Deployment directory exists."
+#     # If backend directory doesn't exist, clone it; otherwise pull latest changes.
+#     if [ ! -d "$BACKEND_DIR" ]; then
+#         echo "Backend directory not found. Cloning backend..."
+#         cd $DEPLOY_DIR
+#         git clone $REPO_URL backend
+#     else
+#         echo "Backend directory exists. Cleaning and pulling latest changes..."
+#         clean_and_update_repo "$BACKEND_DIR"
+#     fi
+# fi
 
 # Move into the backend directory
 cd $BACKEND_DIR
