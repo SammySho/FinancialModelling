@@ -13,6 +13,20 @@ if ! command -v git >/dev/null 2>&1; then
     sudo yum install -y git
 fi
 
+# Function to clean and update repository
+clean_and_update_repo() {
+    local dir=$1
+    echo "Cleaning and updating repository in $dir..."
+    cd "$dir"
+    # Reset any local changes
+    git reset --hard HEAD
+    # Clean untracked files and directories
+    git clean -fd
+    # Pull latest changes
+    git fetch origin
+    git reset --hard origin/main
+}
+
 # Create the deployment directory if it doesn't exist
 if [ ! -d "$DEPLOY_DIR" ]; then
     echo "Deployment directory not found. Creating and cloning repo..."
@@ -28,8 +42,7 @@ else
         git clone $REPO_URL backend
     else
         echo "Backend directory exists. Pulling latest changes..."
-        cd $BACKEND_DIR
-        git pull origin main
+        clean_and_update_repo "$BACKEND_DIR"
     fi
 fi
 
