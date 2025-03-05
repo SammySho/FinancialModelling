@@ -13,8 +13,12 @@ SUPABASE_KEY = os.getenv("DB_KEY")
 if not SUPABASE_URL or not SUPABASE_KEY:
     raise Exception("Missing Supabase credentials. Set DB_URL and DB_KEY environment variables.")
 
+print("Successfully loaded environment variables")
+
 # Create a Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+print("Successfully created Supabase client")
 
 app = FastAPI()
 
