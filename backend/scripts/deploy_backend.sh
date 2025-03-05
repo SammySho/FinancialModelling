@@ -60,18 +60,18 @@ fi
 # Create systemd service file if it doesn't exist
 if [ ! -f "$SERVICE_FILE" ]; then
     echo "Systemd service file not found. Creating fastapi.service..."
-    sudo tee $SERVICE_FILE > /dev/null <<'EOF'
+    sudo tee $SERVICE_FILE > /dev/null <<EOF
 [Unit]
 Description=FastAPI Backend Service
 After=network.target
 
 [Service]
 User=ec2-user
-WorkingDirectory=/home/ec2-user/FinancialModelling/backend/
-ExecStart=/home/ec2-user/FinancialModelling/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 
+WorkingDirectory=${BACKEND_DIR}
+ExecStart=${BACKEND_DIR}/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
-StandardOutput=append:/home/ec2-user/FinancialModelling/backend/uvicorn.log
-StandardError=append:/home/ec2-user/FinancialModelling/backend/uvicorn.log
+StandardOutput=append:${BACKEND_DIR}/uvicorn.log
+StandardError=append:${BACKEND_DIR}/uvicorn.log
 
 [Install]
 WantedBy=multi-user.target
