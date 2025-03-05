@@ -1,0 +1,64 @@
+name: Deploy FastAPI Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH Agent
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          
+          # Define variables
+          DEPLOY_DIR="/home/ec2-user/your-backend"
+          REPO_URL="https://github.com/yourusername/your-repo.git"
+          BACKEND_DIR="$DEPLOY_DIR/backend"
+          
+          # Check if the deployment directory exists
+          if [ ! -d "$DEPLOY_DIR" ]; then
+              echo "Deployment directory not found. Cloning repo..."
+              mkdir -p $DEPLOY_DIR
+              cd $DEPLOY_DIR
+              git clone $REPO_URL
+          else
+              echo "Deployment directory exists."
+          fi
+          
+          # Check if the backend directory exists and update it
+          if [ ! -d "$BACKEND_DIR" ]; then
+              echo "Backend directory not found. Cloning backend..."
+              cd $DEPLOY_DIR
+              git clone $REPO_URL backend
+          else
+              echo "Backend directory exists. Pulling latest changes..."
+              cd $BACKEND_DIR
+              git pull origin main
+          fi
+          
+          # Set up virtual environment if not present
+          if [ ! -d "venv" ]; then
+              echo "Setting up virtual environment..."
+              python3 -m venv venv
+          fi
+          
+          # Activate the virtual environment and install dependencies
+          source venv/bin/activate
+          pip install -r requirements.txt
+          
+          # Restart the FastAPI service using systemd
+          sudo systemctl restart fastapi
+          
+          EOF
