@@ -13,11 +13,11 @@ if ! command -v git >/dev/null 2>&1; then
     sudo yum install -y git
 fi
 
-# Ensure cloudwatch agent is installed
-if ! command -v amazon-cloudwatch-agent >/dev/null 2>&1; then
-    echo "CloudWatch agent not found. Installing cloudwatch agent..."
-    sudo yum install -y amazon-cloudwatch-agent
-fi
+# # Ensure cloudwatch agent is installed
+# if ! command -v amazon-cloudwatch-agent >/dev/null 2>&1; then
+#     echo "CloudWatch agent not found. Installing cloudwatch agent..."
+#     sudo yum install -y amazon-cloudwatch-agent
+# fi
 
 # Create the deployment directory if it doesn't exist
 if [ ! -d "$DEPLOY_DIR" ]; then
@@ -76,15 +76,15 @@ WantedBy=multi-user.target
 EOF
     sudo systemctl daemon-reload
     sudo systemctl enable fastapi.service
-    sudo systemctl enable amazon-cloudwatch-agent
+    #sudo systemctl enable amazon-cloudwatch-agent
 fi
 
-echo "Configuring CloudWatch Agent..."
+# echo "Configuring CloudWatch Agent..."
 
-# Configure and start CloudWatch Agent with our configuration file.
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
-    -a fetch-config -m ec2 -c file:/home/ec2-user/FinancialModelling/backend/cwagent-config.json -s
+# # Configure and start CloudWatch Agent with our configuration file.
+# sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+#     -a fetch-config -m ec2 -c file:/home/ec2-user/FinancialModelling/backend/cwagent-config.json -s
 
-echo "CloudWatch Agent configured."
+# echo "CloudWatch Agent configured."
 
 echo "Deployment complete. FastAPI backend is now running and listening on port 8000."
