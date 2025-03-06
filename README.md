@@ -37,7 +37,7 @@
 <h3 align="center">Financial Modelling Dashboard</h3>
 
   <p align="center">
-    project_description
+    A real-time trading strategy simulator that allows users to visualise stock data, apply technical indicators, and backtest trading strategies.
     <br />
     <a href="https://github.com/SammySho/FinancialModelling"><strong>Explore the docs »</strong></a>
     <br />
@@ -85,22 +85,29 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `SammySho`, `FinancialModelling`, `twitter_handle`, `sammy-shorthouse`, `email_client`, `email`, `Financial Modelling Dashboard`, `project_description`, `project_license`
+The Financial Modelling Dashboard is an interactive web application that enables users to:
+- Visualise real-time stock data for popular tickers (AAPL, SPY, TSLA)
+- Apply technical indicators including Moving Averages, RSI, and Bollinger Bands
+- Backtest trading strategies with customisable parameters
+- View performance metrics for trading strategies
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
+* [![React][React.js]][React-url]
+* [Recharts](https://recharts.org/) - For interactive charts
+* [Axios](https://axios-http.com/) - For API requests
 
-* [![Next][Next.js]][Next-url]
+<!-- * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Angular][Angular.io]][Angular-url]
 * [![Svelte][Svelte.dev]][Svelte-url]
 * [![Laravel][Laravel.com]][Laravel-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![JQuery][JQuery.com]][JQuery-url] -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,7 +121,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+* Node.js (v14 or higher)
 * npm
   ```sh
   npm install npm@latest -g
@@ -148,9 +155,11 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+The dashboard allows you to:
+1. Select a stock ticker from the available options
+2. Toggle different technical indicators to overlay on the price chart
+3. Configure and run backtests using selected indicators
+4. View backtest results including total return and trade statistics
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -159,10 +168,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Add more technical indicators
+- [ ] Support for custom date ranges
+- [ ] Additional stock tickers
+- [ ] Custom strategy builder
+- [ ] Performance optimization for large datasets
+- [ ] Mobile responsive design improvements
 
 See the [open issues](https://github.com/SammySho/FinancialModelling/issues) for a full list of proposed features (and known issues).
 
