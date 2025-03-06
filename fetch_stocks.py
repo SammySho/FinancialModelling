@@ -2,6 +2,7 @@ import yfinance as yf
 import pandas as pd
 import os
 from supabase import create_client, Client
+from typing import Dict
 
 class TechnicalIndicators:
     def __init__(self, df: pd.DataFrame):
