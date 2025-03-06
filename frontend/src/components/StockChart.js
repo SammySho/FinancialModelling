@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, ComposedChart } from "recharts";
 import styles from './StockChart.module.css';
 
 const StockChart = ({ stockData, signals, loading, error }) => {
@@ -22,23 +22,26 @@ const StockChart = ({ stockData, signals, loading, error }) => {
 
   return (
     <div className={styles.chartContainer}>
+      {/* Main price chart */}
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={stockData}>
+        <ComposedChart data={stockData}>
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis yAxisId="price" domain={['auto', 'auto']} />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Tooltip />
           <Legend />
-          <Line 
-            type="monotone" 
-            dataKey="close" 
-            stroke="#2196F3" 
+          <Line
+            yAxisId="price"
+            type="monotone"
+            dataKey="close"
+            stroke="#2196F3"
             name="Stock Price"
             dot={false}
             strokeWidth={2}
           />
           {signals.movingAverage && (
             <Line
+              yAxisId="price"
               type="monotone"
               dataKey="ma_20"
               stroke="#FF9800"
@@ -47,19 +50,10 @@ const StockChart = ({ stockData, signals, loading, error }) => {
               strokeWidth={1}
             />
           )}
-          {signals.rsi && (
-            <Line
-              type="monotone"
-              dataKey="rsi_14"
-              stroke="#4CAF50"
-              name="RSI"
-              dot={false}
-              strokeWidth={1}
-            />
-          )}
           {signals.bollingerBands && (
             <>
               <Line
+                yAxisId="price"
                 type="monotone"
                 dataKey="bb_upper"
                 stroke="#9C27B0"
@@ -69,6 +63,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
                 strokeDasharray="3 3"
               />
               <Line
+                yAxisId="price"
                 type="monotone"
                 dataKey="bb_lower"
                 stroke="#9C27B0"
@@ -79,8 +74,36 @@ const StockChart = ({ stockData, signals, loading, error }) => {
               />
             </>
           )}
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
+
+      {/* RSI chart */}
+      {signals.rsi && (
+        <ResponsiveContainer width="100%" height={200}>
+          <ComposedChart data={stockData}>
+            <XAxis dataKey="date" />
+            <YAxis
+              domain={[0, 100]}
+              ticks={[0, 30, 70, 100]}
+              label={{ value: 'RSI', angle: -90, position: 'insideLeft' }}
+            />
+            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="rsi_14"
+              stroke="#4CAF50"
+              name="RSI (14)"
+              dot={false}
+              strokeWidth={1}
+            />
+            {/* Add reference lines for overbought/oversold levels */}
+            <ReferenceLine y={70} stroke="red" strokeDasharray="3 3" />
+            <ReferenceLine y={30} stroke="green" strokeDasharray="3 3" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TickerSelector.module.css';
 
-const AVAILABLE_TICKERS = ["AAPL", "SPY", "TSLA"];
+const AVAILABLE_TICKERS = ["AAPL", "META", "AMZN", "GOOG", "NFLX"];
 
 const TickerSelector = ({ selectedTicker, onTickerChange, disabled }) => {
   return (
