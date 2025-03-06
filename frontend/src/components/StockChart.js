@@ -1,15 +1,15 @@
 import React from 'react';
-import { 
-  LineChart, 
-  Line, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
-  Legend, 
-  CartesianGrid, 
-  ResponsiveContainer, 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  ResponsiveContainer,
   ComposedChart,
-  ReferenceLine 
+  ReferenceLine
 } from "recharts";
 import styles from './StockChart.module.css';
 
@@ -41,7 +41,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Tooltip />
           <Legend />
-          
+
           {/* Base price line */}
           <Line
             yAxisId="price"
@@ -55,28 +55,28 @@ const StockChart = ({ stockData, signals, loading, error }) => {
 
           {/* Bollinger Bands */}
           {signals.bollingerBands && (
-            <>
-              <Line
-                yAxisId="price"
-                type="monotone"
-                dataKey="bb_upper"
-                stroke="#9C27B0"
-                name="Upper Band"
-                dot={false}
-                strokeWidth={1}
-                strokeDasharray="3 3"
-              />
-              <Line
-                yAxisId="price"
-                type="monotone"
-                dataKey="bb_lower"
-                stroke="#9C27B0"
-                name="Lower Band"
-                dot={false}
-                strokeWidth={1}
-                strokeDasharray="3 3"
-              />
-            </>
+            <Line
+              yAxisId="price"
+              type="monotone"
+              dataKey="bb_upper"
+              stroke="#9C27B0"
+              name="Upper Band"
+              dot={false}
+              strokeWidth={1}
+              strokeDasharray="3 3"
+            />
+          )}
+          {signals.bollingerBands && (
+            <Line
+              yAxisId="price"
+              type="monotone"
+              dataKey="bb_lower"
+              stroke="#9C27B0"
+              name="Lower Band"
+              dot={false}
+              strokeWidth={1}
+              strokeDasharray="3 3"
+            />
           )}
 
           {/* Moving Average */}
