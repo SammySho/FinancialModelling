@@ -41,6 +41,8 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Tooltip />
           <Legend />
+          
+          {/* Base price line */}
           <Line
             yAxisId="price"
             type="monotone"
@@ -50,17 +52,8 @@ const StockChart = ({ stockData, signals, loading, error }) => {
             dot={false}
             strokeWidth={2}
           />
-          {signals.movingAverage && (
-            <Line
-              yAxisId="price"
-              type="monotone"
-              dataKey="ma_20"
-              stroke="#FF9800"
-              name="Moving Average"
-              dot={false}
-              strokeWidth={1}
-            />
-          )}
+
+          {/* Bollinger Bands */}
           {signals.bollingerBands && (
             <>
               <Line
@@ -84,6 +77,20 @@ const StockChart = ({ stockData, signals, loading, error }) => {
                 strokeDasharray="3 3"
               />
             </>
+          )}
+
+          {/* Moving Average */}
+          {signals.movingAverage && (
+            <Line
+              yAxisId="price"
+              type="monotone"
+              dataKey="ma_20"
+              stroke="#FF9800"
+              name="Moving Average (20)"
+              dot={false}
+              strokeWidth={1.5}
+              connectNulls={true}
+            />
           )}
         </ComposedChart>
       </ResponsiveContainer>
