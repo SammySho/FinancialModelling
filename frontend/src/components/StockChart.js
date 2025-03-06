@@ -40,7 +40,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           {signals.movingAverage && (
             <Line
               type="monotone"
-              dataKey="ma"
+              dataKey="ma_20"
               stroke="#FF9800"
               name="Moving Average"
               dot={false}
@@ -50,7 +50,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           {signals.rsi && (
             <Line
               type="monotone"
-              dataKey="rsi"
+              dataKey="rsi_14"
               stroke="#4CAF50"
               name="RSI"
               dot={false}
@@ -61,7 +61,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
             <>
               <Line
                 type="monotone"
-                dataKey="upperBand"
+                dataKey="bb_upper"
                 stroke="#9C27B0"
                 name="Upper Band"
                 dot={false}
@@ -70,7 +70,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
               />
               <Line
                 type="monotone"
-                dataKey="lowerBand"
+                dataKey="bb_lower"
                 stroke="#9C27B0"
                 name="Lower Band"
                 dot={false}

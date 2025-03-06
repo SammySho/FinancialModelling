@@ -245,9 +245,9 @@ Project Link: [https://github.com/SammySho/FinancialModelling](https://github.co
 [product-screenshot]: images/screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Python.org]: https://img.shields.io/badge/Python-2ea44f?style=for-the-badge&logo=python
+[Python.org]: https://img.shields.io/badge/Python-2ea44f?style=for-the-badge&logo=python&logoColor=61DAFB
 [Python-url]: https://www.python.org
-[Recharts.org]: https://img.shields.io/badge/Recharts-2ea44f?style=for-the-badge
+[Recharts.org]: https://img.shields.io/badge/Recharts-2ea44f?style=for-the-badge&logoColor=61DAFB
 [Recharts-url]: https://recharts.org
-[Axios.js]: https://img.shields.io/badge/Axios-2ea44f?style=for-the-badge&logo=axios
+[Axios.js]: https://img.shields.io/badge/Axios-2ea44f?style=for-the-badge&logo=axios&logoColor=61DAFB
 [Axios-url]: https://axios-http.com/

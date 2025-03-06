@@ -57,6 +57,7 @@ def get_stock_data(ticker: str):
             .select("*")
             .eq("ticker", ticker)
             .gte("date", one_year_ago)
+            .order("date", desc=False)
             .execute()
         )
 
