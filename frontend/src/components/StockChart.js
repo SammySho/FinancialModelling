@@ -1,5 +1,16 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, ComposedChart } from "recharts";
+import { 
+  LineChart, 
+  Line, 
+  XAxis, 
+  YAxis, 
+  Tooltip, 
+  Legend, 
+  CartesianGrid, 
+  ResponsiveContainer, 
+  ComposedChart,
+  ReferenceLine 
+} from "recharts";
 import styles from './StockChart.module.css';
 
 const StockChart = ({ stockData, signals, loading, error }) => {
