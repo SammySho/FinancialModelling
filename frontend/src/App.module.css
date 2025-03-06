@@ -140,3 +140,45 @@
         padding: 1rem;
     }
 }
+
+.signalsPanel {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  
+  .backtestSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .backtestButton {
+    padding: 0.5rem 1rem;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .backtestButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .backtestResults {
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .backtestResults h4 {
+    margin-top: 0;
+    color: #333;
+  }
