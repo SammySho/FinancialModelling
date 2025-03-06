@@ -1,7 +1,7 @@
 name: Deploy FastAPI Backend
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -22,37 +22,87 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<-'EOF'
-          
-          # Ensure git is installed
-          if ! command -v git &> /dev/null; then
-              echo "Git not found. Installing git..."
-              sudo yum install -y git
-          fi
+            # Define variables
+            DEPLOY_DIR="/home/ec2-user/FinancialModelling"
 
-          # Define variables
-          DEPLOY_DIR="/home/ec2-user/FinancialModelling"
+            # Clone or update repository
+            if [ ! -d "$DEPLOY_DIR" ]; then
+                echo "Cloning repository..."
+                git clone https://github.com/SammySho/FinancialModelling.git "$DEPLOY_DIR"
+            else
+                echo "Updating repository..."
+                cd "$DEPLOY_DIR"
+                git reset --hard HEAD
+                git clean -fd
+                git fetch origin
+                git reset --hard origin/main
+            fi
 
-          # If the directory does not exist, clone the repository; otherwise, pull the latest changes.
-          if [ ! -d "$DEPLOY_DIR" ]; then
-              echo "Deployment directory not found. Cloning repository..."
-              mkdir -p "$DEPLOY_DIR"
-              git clone https://github.com/SammySho/FinancialModelling.git "$DEPLOY_DIR"
-          else
-              echo "Deployment directory exists. Cleaning and pulling latest changes..."
-              cd "$DEPLOY_DIR"
-              git reset --hard HEAD
-              git clean -fd
-              git fetch origin
-              git reset --hard origin/main
-          fi
+            # Set up environment variables
+            cd "$DEPLOY_DIR"
+            echo "DB_URL=${{ secrets.DB_URL }}" > backend/.env
+            echo "DB_KEY=${{ secrets.DB_KEY }}" >> backend/.env
 
-          cd "$DEPLOY_DIR"
-
-          echo "DB_URL=${{ secrets.DB_URL }}" > backend/.env
-          echo "DB_KEY=${{ secrets.DB_KEY }}" >> backend/.env
-
-          # Ensure the deployment script is executable, then run it.
-          echo "Running deployment script..."
-          chmod +x backend/scripts/deploy_backend.sh
-          ./backend/scripts/deploy_backend.sh
+            # Run deployment using Make
+            cd backend
+            make all
           EOF
+
+# name: Deploy FastAPI Backend
+
+# on:
+#   workflow_dispatch: # Allows manual triggering
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+
+#       - name: Set up SSH Agent
+#         uses: webfactory/ssh-agent@v0.5.4
+#         with:
+#           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+#       - name: Deploy to EC2
+#         run: |
+#           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<-'EOF'
+          
+#           # Ensure git is installed
+#           if ! command -v git &> /dev/null; then
+#               echo "Git not found. Installing git..."
+#               sudo yum install -y git
+#           fi
+
+#           # Define variables
+#           DEPLOY_DIR="/home/ec2-user/FinancialModelling"
+
+#           # If the directory does not exist, clone the repository; otherwise, pull the latest changes.
+#           if [ ! -d "$DEPLOY_DIR" ]; then
+#               echo "Deployment directory not found. Cloning repository..."
+#               mkdir -p "$DEPLOY_DIR"
+#               git clone https://github.com/SammySho/FinancialModelling.git "$DEPLOY_DIR"
+#           else
+#               echo "Deployment directory exists. Cleaning and pulling latest changes..."
+#               cd "$DEPLOY_DIR"
+#               git reset --hard HEAD
+#               git clean -fd
+#               git fetch origin
+#               git reset --hard origin/main
+#           fi
+
+#           cd "$DEPLOY_DIR"
+
+#           echo "DB_URL=${{ secrets.DB_URL }}" > backend/.env
+#           echo "DB_KEY=${{ secrets.DB_KEY }}" >> backend/.env
+
+#           # Ensure the deployment script is executable, then run it.
+#           echo "Running deployment script..."
+#           chmod +x backend/scripts/deploy_backend.sh
+#           ./backend/scripts/deploy_backend.sh
+#           EOF
