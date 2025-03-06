@@ -44,6 +44,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
 
           {/* Base price line */}
           <Line
+            id="price-line"
             yAxisId="price"
             type="monotone"
             dataKey="close"
@@ -56,6 +57,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           {/* Bollinger Bands */}
           {signals.bollingerBands && (
             <Line
+              id="bb-upper"
               yAxisId="price"
               type="monotone"
               dataKey="bb_upper"
@@ -68,6 +70,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           )}
           {signals.bollingerBands && (
             <Line
+              id="bb-lower"
               yAxisId="price"
               type="monotone"
               dataKey="bb_lower"
@@ -82,6 +85,7 @@ const StockChart = ({ stockData, signals, loading, error }) => {
           {/* Moving Average */}
           {signals.movingAverage && (
             <Line
+              id="ma-line"
               yAxisId="price"
               type="monotone"
               dataKey="ma_20"
@@ -89,7 +93,6 @@ const StockChart = ({ stockData, signals, loading, error }) => {
               name="Moving Average (20)"
               dot={false}
               strokeWidth={1.5}
-              connectNulls={true}
             />
           )}
         </ComposedChart>
