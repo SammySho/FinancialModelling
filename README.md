@@ -98,9 +98,8 @@ The Financial Modelling Dashboard is an interactive web application that enables
 ### Built With
 * [![React][React.js]][React-url]
 * [![Python][Python.org]][Python-url]
-* [Recharts](https://recharts.org/) - For interactive charts
-* [Axios](https://axios-http.com/) - For API requests
-
+* [![Axios][Axios.js]][Axios-url]
+* [![Recharts][Recharts.org]][Recharts-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -248,5 +247,7 @@ Project Link: [https://github.com/SammySho/FinancialModelling](https://github.co
 [React-url]: https://reactjs.org/
 [Python.org]: https://img.shields.io/badge/Python-2ea44f?style=for-the-badge&logo=python
 [Python-url]: https://www.python.org
+[Recharts.org]: https://img.shields.io/badge/Recharts-2ea44f?style=for-the-badge
+[Recharts-url]: https://recharts.org
 [Axios.js]: https://img.shields.io/badge/Axios-2ea44f?style=for-the-badge&logo=axios
 [Axios-url]: https://axios-http.com/
