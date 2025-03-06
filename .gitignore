@@ -27,6 +27,7 @@ wheels/
 
 # testing
 /coverage
+/testing
 
 # production
 /build
