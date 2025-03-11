@@ -29,8 +29,6 @@ const App = () => {
 
       try {
         const response = await axios.get(`${backendUrl}/stocks/${selectedTicker}`);
-        // Print out the backend url
-        console.log('Backend URL:', backendUrl);
         setStockData(response.data);
       } catch (err) {
         setError(err.message || 'Failed to fetch stock data');
